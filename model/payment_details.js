@@ -6,19 +6,19 @@ let paymentSchema = new schema({
         type: String,
         index: true,
     },
-    paymentid: {
-        type: String,
-        index: true,
-    },
     orderid:{
         type: String,
-    },
-    signature:{
-        type: String
     },
     amount: {
         type: Number, 
         required: true
+    },
+    paymentid: {
+        type: String,
+        index: true,
+    },
+    signature:{
+        type: String
     },
     success_status: {
         type:Boolean,
