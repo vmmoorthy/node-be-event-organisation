@@ -60,15 +60,16 @@ router.post('/signup', function (req, res) {
 */
 
 router.post('/paymentSuccess', function (req, res) {
-    console.log(req)
+    // console.log(req)
     console.log(req.body)
-    // paymentModel.findByIdAndUpdate({ paymentid: req.body.razorpay_order_id }, { payment_id: req.body.razorpay_payment_id, signature: req.body.razorpay_signature, success_status: true }).then(function (success) {
-    //     console.log('payment Success')
-    //     res.send({ status: true })
-    // }, function (fail) {
-    //     console.log('Error while getting success payment')
-    //     res.send({ status: false })
-    // })
+    res.send(req.body)
+    paymentModel.findByIdAndUpdate({ orderid: req.body.razorpayOrderId }, { paymentid: req.body.razorpayPaymentId, signature: req.body.razorpaySignature, success_status: true }).then(function (success) {
+        console.log('payment Success')
+        res.send({ status: true })
+    }, function (fail) {
+        console.log('Error while getting success payment')
+        res.send({ status: false })
+    })
 })
 
 
