@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitation for Event</title>
+    <style>
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    background-color: bisque;
+    width: 100%;
+    height: max-content;
+}
+.title{
+    height: 10vh;
+    width: 80%;
+    padding: 20px;
+    background-color: coral;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    box-shadow: 0px 0px 12px 6px #8D6E63;
+}
+.title h1{
+    text-shadow: 0px 0px 20px white;
+}
+.body{
+    width: 100%;
+}
+.body table{
+    margin: auto;
+    position: relative;
+    background-color: rgba(41, 143, 109, 0.438);
+    top: 10px;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    font-size: xx-large;
+}
+.body td{
+    padding: 5px;
+}
+.rules{
+    display: block;
+    position: relative;
+    top: 12px;
+    width: 50%;
+    padding: 5px;
+    color: white;
+    font-size: xx-large;
+    text-align: center;
+    background-color: dimgrey;
+    text-decoration: none;
+    margin: auto;
+}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="title">
+        <h1>Invitation for <%= data.title %></h1>
+    </div>
+    
+    <div class="body">
+        <table>
+            <tr>
+                <th>Competition</th>
+                <th>Registration price</th>
+            </tr>
+            <% data.competition.forEach(val=>{ %>
+            <tr>
+                <td><%= val.competition_name %></td>
+                <td><%= val.price %></td>
+            </tr>
+            <% }) %>
+        </table>
+        <a href="<%= data.link %>" class="rules">Rules and regulations </a>
+    </div>
+</div>
+</body>
+</html>
