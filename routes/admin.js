@@ -58,8 +58,17 @@ createEvent
 
 */
 
-router.post('/addCompetition', function (req, res) {
+router.get('/viewEvent',(req,res)=>{
+    eventModel.find().then(resp=>res.send(resp),rej=>res.status(500).send(rej))
+    .catch(err=>{
+        console.log(err);
+        res.status(500).send({err:"There is an error"})
+    })
+})
 
+
+router.post('/addCompetition', function (req, res) {
+    
     competitionModel.create(req.body.competition).then(function (success) {
         console.log('data inserted successfully')
         req.body.team_leader.competition_id=success._id;
@@ -93,6 +102,49 @@ router.post('/addCompetition', function (req, res) {
     }
 }
 */
+
+router.get('/viewCompetition',(req,res)=>{
+    var comp_data=[];
+    var count=1;
+    competitionModel.find().then(resp=>{
+        
+            resp.forEach(val=>{
+                // console.log(val)
+                team_leader.findOne({competition_id:val._id}).then(team_val=>{
+                    var comp={
+                        max_mark: val.max_mark,
+                        rules_pdf_path: val.rules_pdf_path,
+                        f_prize: val.f_prize,
+                        s_prize: val.s_prize,
+                        t_prize: val.t_prize,
+                        _id: val._id,
+                        competition_name: val.competition_name,
+                        price: val.price,
+                        createdAt: val.createdAt,
+                        updatedAt: val.updatedAt,
+                        team_leader: team_val
+                    }
+                    console.log(comp_data);
+                    comp_data.push(comp)
+                    if(resp.length==count++)
+                    res.send(comp_data)
+                })
+            })
+    },rej=>res.status(500).send(rej))
+    .catch(err=>{
+        console.log(err);
+        res.status(500).send({err:"There is an error"})
+    })
+})
+
+router.get('/viewCompetition/:id',(req,res)=>{
+    competitionModel.findOne({_id:req.params.id}).then(resp=>res.send(resp),rej=>res.status(500).send(rej))
+    .catch(err=>{
+        console.log(err);
+        res.status(500).send({err:"There is an error"})
+    })
+})
+
 
 router.post('/login', function (req, res) {
     AdminModel.findOne({email:req.body.email,password:req.body.password}).then(function (success) {
