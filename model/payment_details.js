@@ -8,6 +8,7 @@ let paymentSchema = new schema({
     },
     orderid:{
         type: String,
+        index:true
     },
     amount: {
         type: Number, 
@@ -18,7 +19,8 @@ let paymentSchema = new schema({
         index: true,
     },
     signature:{
-        type: String
+        type: String,
+        index:true
     },
     success_status: {
         type:Boolean,

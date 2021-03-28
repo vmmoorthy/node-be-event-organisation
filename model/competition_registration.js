@@ -3,13 +3,19 @@ const schema = mongoose.Schema;
 
 let comp_reg_Schema = new schema({
     payment_id: {
-        type:String
+        type:String,
+        index:true,
+        required:true
     },
     person_id: {
-        type: String
+        type: String,
+        index:true,
+        required:true
     },
     competition_id: {
-        type: String
+        type: String,
+        index:true,
+        required:true
     }
 },
 {
