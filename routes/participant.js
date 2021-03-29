@@ -159,6 +159,32 @@ router.post('/registered_competition', (req, res) => {
         })
 })
 
+
+router.post("/fetchWinners",(req,res)=>{
+    personModule.findOne({email:req.body.email},{_id:1}).then(function (success) {
+        console.log(success)
+        competition_registration.find({person_id:success._id}).then(success=>{
+                // res.send(success)
+
+                let competi_id=[];
+            success.forEach(compet => {
+                competi_id.push(compet.competition_id)
+            }) 
+
+            competitionModel.find({_id:{$in:competi_id}}).then(success=>{
+                res.send(success)
+            },(fail)=>{
+                res.status(500).send({status:false})
+            });
+
+            },(fail)=>{
+                res.status(500).send({status:false})
+            });
+
+        }).catch((rej)=>res.status(500).send(rej))
+  
+    })
+
 router.get('/notification',(req,res)=>{
     notificationModule.find().then(resp=>res.send(resp),rej=>res.send(rej))
 })
