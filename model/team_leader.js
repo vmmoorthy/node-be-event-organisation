@@ -11,7 +11,8 @@ const team_leader_schema=new Schema(
             type: String,
             required: true,
             match: /.+\@.+\..+/,
-            index: true
+            index: true,
+            unique:true
         },
         password:{
             type:String,

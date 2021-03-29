@@ -10,11 +10,13 @@ let personSchema = new schema({
         type: String,
         required: true,
         match: /.+\@.+\..+/,
-        index: true
+        index: true,
+        unique:true
     },
     phone_no:{
         type:Number,
-        required:true
+        required:true,
+        unique:true
     },
     password:{
         type:String,

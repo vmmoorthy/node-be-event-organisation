@@ -13,7 +13,8 @@ let adminSchema=new schema({
         type: String,
         required: true,
         match: /.+\@.+\..+/,
-        index: true
+        index: true,
+        unique:true
     }
 },
 {
